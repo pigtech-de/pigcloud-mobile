@@ -27,8 +27,7 @@ pull requests; bug reports and feature requests go to
 [pigcloud-issues](https://github.com/pigtech-de/pigcloud-issues/issues).
 
 The source is available under the
-[PolyForm Internal Use License 1.0.0](LICENSE): you may read, audit, and build
-it for your own internal or personal use. Any other use, including
-redistribution, needs written permission from PigTech. The official app, once
-released, is provided under the
+[PolyForm Shield License 1.0.0](LICENSE): you may read, audit, build, and use
+it for any purpose except providing a product that competes with PigCloud.
+The official app, once released, is provided under the
 [PigCloud Terms of Service](https://pigtech.de/terms/).
