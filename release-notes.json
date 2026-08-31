@@ -1,0 +1,4 @@
+{
+    "en-US": "Sign in with a passkey or a security key now works inside the app.\nLinks to pigcloud.de open in the app instead of the browser.\nWhen two-step verification is on, you can pick any method you have set up.\nLayout fixes around the status bar and the notch.",
+    "de-DE": "Die Anmeldung mit Passkey oder Sicherheitsschlüssel funktioniert jetzt in der App.\nLinks zu pigcloud.de öffnen sich in der App statt im Browser.\nBei aktiver Zwei-Faktor-Bestätigung kannst du jede eingerichtete Methode wählen.\nLayout-Korrekturen an Statusleiste und Notch."
+}
