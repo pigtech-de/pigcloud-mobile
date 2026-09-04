@@ -7,11 +7,31 @@ import com.getcapacitor.BridgeActivity;
 
 public class MainActivity extends BridgeActivity {
 
+    private static volatile boolean foreground = false;
+
+    static boolean isInForeground() {
+        return foreground;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         registerPlugin(MediaSaverPlugin.class);
+        registerPlugin(ShareReceiverPlugin.class);
+        registerPlugin(PushPlugin.class);
         super.onCreate(savedInstanceState);
         enableWebAuthentication();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        foreground = true;
+    }
+
+    @Override
+    public void onPause() {
+        foreground = false;
+        super.onPause();
     }
 
     private void enableWebAuthentication() {

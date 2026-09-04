@@ -3,6 +3,7 @@ package de.pigcloud.app;
 import android.Manifest;
 import android.content.ContentResolver;
 import android.content.ContentValues;
+import android.content.Intent;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Build;
@@ -11,6 +12,7 @@ import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.util.Base64;
 import androidx.annotation.RequiresApi;
+import androidx.core.content.FileProvider;
 import com.getcapacitor.JSObject;
 import com.getcapacitor.PermissionState;
 import com.getcapacitor.Plugin;
@@ -210,6 +212,34 @@ public class MediaSaverPlugin extends Plugin {
             discard(session);
         }
         call.resolve();
+    }
+
+    @PluginMethod
+    public void share(PluginCall call) {
+        String raw = call.getString("uri");
+        if (TextUtils.isEmpty(raw)) {
+            call.reject("Missing uri", "bad_uri");
+            return;
+        }
+        String mimeType = call.getString("mimeType");
+        if (TextUtils.isEmpty(mimeType)) {
+            mimeType = DEFAULT_MIME;
+        }
+
+        Uri uri = Uri.parse(raw);
+        try {
+            if ("file".equals(uri.getScheme()) && uri.getPath() != null) {
+                uri = FileProvider.getUriForFile(getContext(), getContext().getPackageName() + ".fileprovider", new File(uri.getPath()));
+            }
+            Intent send = new Intent(Intent.ACTION_SEND);
+            send.setType(mimeType);
+            send.putExtra(Intent.EXTRA_STREAM, uri);
+            send.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            getActivity().startActivity(Intent.createChooser(send, null));
+            call.resolve();
+        } catch (RuntimeException e) {
+            call.reject("Could not open the share sheet", "share_failed", e);
+        }
     }
 
     @Override
