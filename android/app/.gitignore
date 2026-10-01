@@ -1,0 +1,4 @@
+/build/*
+!/build/.npmkeep
+/libs/pigcloud.aar
+/libs/pigcloud-sources.jar
